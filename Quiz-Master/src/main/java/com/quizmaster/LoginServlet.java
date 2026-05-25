@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
                 // store user email in session so profile and other pages can use it
                 HttpSession session = req.getSession(true);
                 session.setAttribute("userEmail", email);
+                session.setAttribute("userId", r.getInt("id"));
 
                 resp.sendRedirect("dashboard.jsp");
 

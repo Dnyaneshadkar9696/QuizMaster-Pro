@@ -3,6 +3,7 @@ package com.quizmaster;
 import java.io.IOException;
 import java.util.List;
 
+import com.quizmaster.dao.ResultDao;
 import com.quizmaster.model.Questions;
 
 import jakarta.servlet.ServletException;
@@ -48,6 +49,21 @@ public class SubmitQuizServlet extends HttpServlet {
                     score++;
                 }
             }
+        }
+        
+     // Save result in database
+          // From the blow block of code we are getting the user id and all to store the test results 
+        // when the user submit the result gets added.
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if(userId != null){
+
+            ResultDao dao = new ResultDao();
+
+            dao.saveResult(
+                    userId,
+                    score,
+                    total);
         }
 
         // Optionally remove questions from session
